@@ -8,8 +8,8 @@ import "./AdministrativeComponent.css";
 
 const AdministrativeComponent = () => {
   const { dbData } = useContext(FireContext);
-  const { setDbData } = useContext(FireContext);
   const [locationData, setLocationData] = useState([]);
+  const [moveEmployeem, setMoveEmployee] = useState(false);
 
   useEffect(() => {
     if (dbData.length > 0) {
@@ -17,10 +17,9 @@ const AdministrativeComponent = () => {
     }
   }, [dbData]);
 
-  useEffect(() => {}, [dbData]);
+  useEffect(() => {}, [moveEmployeem]);
 
   const moveEmployee = (employeeID, locationID) => {
-
     let boolLocationReady = false;
 
     dbData[1].sede.map((dataEmployee) => {
@@ -32,20 +31,20 @@ const AdministrativeComponent = () => {
         if (dataEmployeeLocation.hasOwnProperty("id")) {
           if (dataEmployeeLocation.id === employeeID) {
             alert("The employee is already at the workplace location");
-            boolLocationReady = true
+            boolLocationReady = true;
           }
         }
       });
     });
 
-    if(boolLocationReady === false){
-      setDbData((dbData) => [
-        ...dbData,
-        dbData[1].sede[locationID].employee.push(dbData[0].employee[employeeID]),
-      ]);
+    if (boolLocationReady === false) {
+      dbData[0].employee[employeeID].site.lat = dbData[1].sede[locationID].lat;
+      dbData[0].employee[employeeID].site.lng = dbData[1].sede[locationID].lng;
+
+      dbData[1].sede[locationID].employee.push(dbData[0].employee[employeeID]);
+      setMoveEmployee(true);
     }
-    
-    console.log(dbData);
+
   };
 
   const mappingLocationCard = () => {
@@ -126,8 +125,6 @@ const AdministrativeComponent = () => {
       </div>
     ));
   };
-
-  console.log(dbData);
 
   return (
     <div className="pageAdminBase">
