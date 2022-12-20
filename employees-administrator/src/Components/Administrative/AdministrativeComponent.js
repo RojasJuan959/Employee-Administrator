@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { FireContext } from "../../Context/FireContext.js";
+import { useNavigate } from 'react-router-dom';
 import QRCode from "react-qr-code";
 import Company from "../../Assets/Company.png";
 import User from "../../Assets/User.png";
@@ -7,6 +8,7 @@ import User from "../../Assets/User.png";
 import "./AdministrativeComponent.css";
 
 const AdministrativeComponent = () => {
+  const navigate = useNavigate();
   const { dbData } = useContext(FireContext);
   const [locationData, setLocationData] = useState([]);
   const [moveEmployeem, setMoveEmployee] = useState(false);
@@ -56,7 +58,7 @@ const AdministrativeComponent = () => {
         <div className="locationCardName">
           <p className="nameData">{location.name}</p>
         </div>
-        <button className="locationCardAction">More</button>
+        <button className="locationCardAction" onClick={() => {navigate(`/Location/${index}`)}}>More</button>
         <div className="locationCardEmployees">
           {location.employee[0].hasOwnProperty("id") && (
             <div className="locationCardEmployeesImage">

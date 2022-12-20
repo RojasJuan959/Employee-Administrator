@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FireContext } from "../../Context/FireContext.js";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import "./SesionComponent.css";
 
@@ -15,10 +15,9 @@ const SesionComponent = () => {
       document.getElementsByClassName("loginInputPassword")[0].value;
 
     if (username === dbData[2].name && password === dbData[2].password) {
-        navigate('/Home');
-    }
-    else {
-        alert('Usuario/Password Incorrecto(s)');
+      navigate("/Home");
+    } else {
+      alert("Usuario/Password Incorrecto(s)");
     }
   };
 
@@ -34,7 +33,14 @@ const SesionComponent = () => {
           Password{" "}
           <input type={"password"} className="loginInputPassword"></input>
         </label>
-        <button className="loginButton" onClick={() => {validateSession()}}>Login</button>
+        <button
+          className="loginButton"
+          onClick={() => {
+            validateSession();
+          }}
+        >
+          Login
+        </button>
       </div>
     </div>
   );
