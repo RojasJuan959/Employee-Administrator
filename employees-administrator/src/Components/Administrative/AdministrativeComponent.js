@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FireContext } from "../../Context/FireContext.js";
 import QRCode from "react-qr-code";
 import Company from "../../Assets/Company.png";
@@ -8,6 +8,26 @@ import "./AdministrativeComponent.css";
 
 const AdministrativeComponent = () => {
   const { dbData } = useContext(FireContext);
+  const { setDbData } = useContext(FireContext);
+  const [locationData, setLocationData] = useState([]);
+
+  useEffect(() => {
+    if (dbData.length > 0) {
+      setLocationData(dbData[1].sede);
+    }
+  }, [dbData]);
+
+  useEffect(() => {}, [dbData]);
+
+  const moveEmployee = (employeeID, locationID) => {
+    
+
+    setDbData((dbData) => [
+      ...dbData,
+      dbData[1].sede[locationID].employee.push(dbData[0].employee[employeeID]),
+    ]);
+    console.log(dbData);
+  };
 
   const mappingLocationCard = () => {
     return dbData[1].sede.map((location, index) => (
@@ -59,7 +79,30 @@ const AdministrativeComponent = () => {
           />
         </div>
         <div className="employeeCardAction">
-
+          <select
+            className={`employeeCardSectionAction employee${employee.name}${employee.id}`}
+            name="locations"
+          >
+            <option value={""}></option>
+            {locationData.map((location, index) => (
+              <option value={index} key={index}>
+                {location.name}
+              </option>
+            ))}
+          </select>
+          <button
+            onClick={() => {
+              moveEmployee(
+                index,
+                document.getElementsByClassName(
+                  `employee${employee.name}${employee.id}`
+                )[0].value
+              );
+            }}
+            className="employeeAction"
+          >
+            Get into
+          </button>
         </div>
       </div>
     ));
@@ -74,7 +117,7 @@ const AdministrativeComponent = () => {
         {dbData.length > 0 && mappingLocationCard()}
       </div>
       <div className="adminBaseEmployees">
-        {dbData.length > 0 && mappingEmployeeCard()}
+        {dbData.length > 0 && locationData.length > 0 && mappingEmployeeCard()}
       </div>
     </div>
   );

@@ -5,15 +5,16 @@
   align-items: center;
 
   width: 100%;
+  min-width: 290px;
 }
 
 .adminBaseLocationSubTitle {
-    text-align: center;
-    font-size: 35px;
-    letter-spacing: -2px;
-    font-weight: bold;
-    color: black;
-    margin: 20px 0px 0px 0px;
+  text-align: center;
+  font-size: 35px;
+  letter-spacing: -2px;
+  font-weight: bold;
+  color: black;
+  margin: 20px 0px 0px 0px;
 }
 
 .adminBaseLocation,
@@ -48,9 +49,10 @@
 }
 
 .employeesBaseCard {
-    margin: 20px 50px 20px 50px;
+  margin: 20px 50px 20px 50px;
 
-    width: 200px;
+  width: 200px;
+  height: auto;
 }
 
 .locationCardImage,
@@ -91,7 +93,8 @@
   letter-spacing: -1px;
 }
 
-.locationCardAction {
+.locationCardAction,
+.employeeAction {
   transition: all 0.3s ease;
   border-radius: 5px;
   background-color: white;
@@ -103,7 +106,8 @@
   height: 25px;
 }
 
-.locationCardAction:hover {
+.locationCardAction:hover,
+.employeeAction:hover {
   height: 35px;
 }
 
@@ -136,7 +140,26 @@
 }
 
 .employeeCardQR {
-    margin: 10px 5px 10px 5px;
+  margin: 25px 5px 10px 5px;
 
-    width: 100%;
+  width: 100%;
+}
+
+.employeeCardAction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 90%;
+}
+
+.employeeCardSectionAction {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 2px 2px 2px 5px;
+  margin: 20px 0px 10px 0px;
+
+  height: 25px;
+  width: 100%;
 }
