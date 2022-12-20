@@ -1,0 +1,71 @@
+.pageLoginBase {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+}
+
+.loginBase {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  bottom: 50%;
+  border: 2px solid black;
+  box-shadow: 0px 0px 10px -3px black;
+  border-radius: 16px;
+
+  height: 400px;
+  width: 400px;
+}
+
+.loginBaseTitle,
+.loginBaseSubTitle {
+  text-align: center;
+  font-size: 35px;
+  letter-spacing: -2px;
+  font-weight: bold;
+  color: black;
+}
+
+.loginBaseSubTitle {
+  font-size: 25px;
+  margin: 10px 0px 15px 0px;
+}
+
+.loginInputName,
+.loginInputPassword {
+  border-radius: 5px;
+  margin: 10px 0px 10px 10px;
+  padding: 2px 2px 2px 5px;
+
+  height: 25px;
+}
+
+.loginInputLaber {
+  background-color: white;
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: -1px;
+}
+
+.loginButton {
+  transition: all .3s ease;
+  margin: 40px 0px 10px 0px;
+  border-radius: 5px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: -1px;
+
+  width: 50%;
+  height: 25px;
+}
+
+.loginButton:hover {
+  height: 35px;
+}

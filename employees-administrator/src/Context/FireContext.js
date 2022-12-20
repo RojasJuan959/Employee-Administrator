@@ -5,6 +5,7 @@ import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
 export const FireContext = createContext();
 
 export const FireProvider = ({ children }) => {
+    
   const [dbData, setDbData] = useState([]);
 
   useEffect(() => {
@@ -26,10 +27,10 @@ export const FireProvider = ({ children }) => {
   }, []);
 
   async function getCities(db) {
-    const citiesCol = collection(db, 'EmployeesAdministrator');
-    const citySnapshot = await getDocs(citiesCol);
-    const cityList = citySnapshot.docs.map(doc => doc.data());
-    setDbData(cityList);
+    let collectiondb = collection(db, 'EmployeesAdministrator');
+    let documentdb = await getDocs(collectiondb);
+    let data = documentdb.docs.map(doc => doc.data());
+    setDbData(data);
   }
 
   return (
