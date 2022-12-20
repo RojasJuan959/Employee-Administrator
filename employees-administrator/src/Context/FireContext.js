@@ -22,11 +22,10 @@ export const FireProvider = ({ children }) => {
     let fb = initializeApp(firebaseConfig);
     let db = getFirestore(fb);
 
-    getCities(db);
-
+    getData(db);
   }, []);
 
-  async function getCities(db) {
+  async function getData(db) {
     let collectiondb = collection(db, 'EmployeesAdministrator');
     let documentdb = await getDocs(collectiondb);
     let data = documentdb.docs.map(doc => doc.data());
@@ -36,8 +35,7 @@ export const FireProvider = ({ children }) => {
   return (
     <FireContext.Provider
       value={{
-        dbData,
-        setDbData,
+        dbData
       }}
     >
       {children}

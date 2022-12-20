@@ -24,27 +24,35 @@ const AdministrativeComponent = () => {
   const moveEmployee = (employeeID, locationID) => {
     let boolLocationReady = false;
 
-    dbData[1].sede.map((dataEmployee) => {
-      dataEmployee.employee.map((dataEmployeeLocation, index) => {
-        if (!dataEmployeeLocation.hasOwnProperty("id")) {
-          dbData[1].sede[locationID].employee.splice(index, 1);
-        }
-
-        if (dataEmployeeLocation.hasOwnProperty("id")) {
-          if (dataEmployeeLocation.id === employeeID) {
-            alert("The employee is already at the workplace location");
-            boolLocationReady = true;
+    if (locationID === "-") {
+      alert("Select some location to employee get into");
+    } else {
+      dbData[1].sede.map((dataEmployee) => {
+        dataEmployee.employee.map((dataEmployeeLocation, index) => {
+          if (!dataEmployeeLocation.hasOwnProperty("id")) {
+            dbData[1].sede[locationID].employee.splice(index, 1);
           }
-        }
+
+          if (dataEmployeeLocation.hasOwnProperty("id")) {
+            if (dataEmployeeLocation.id === employeeID) {
+              alert("The employee is already at the workplace location");
+              boolLocationReady = true;
+            }
+          }
+        });
       });
-    });
 
-    if (boolLocationReady === false) {
-      dbData[0].employee[employeeID].site.lat = dbData[1].sede[locationID].lat;
-      dbData[0].employee[employeeID].site.lng = dbData[1].sede[locationID].lng;
+      if (boolLocationReady === false) {
+        dbData[0].employee[employeeID].site.lat =
+          dbData[1].sede[locationID].lat;
+        dbData[0].employee[employeeID].site.lng =
+          dbData[1].sede[locationID].lng;
 
-      dbData[1].sede[locationID].employee.push(dbData[0].employee[employeeID]);
-      setMoveEmployee(true);
+        dbData[1].sede[locationID].employee.push(
+          dbData[0].employee[employeeID]
+        );
+        setMoveEmployee(true);
+      }
     }
   };
 
@@ -66,11 +74,12 @@ const AdministrativeComponent = () => {
           More
         </button>
         <div className="locationCardEmployees">
-          {location.employee.length === 1 && location.employee[0].hasOwnProperty("id") && (
-            <div className="locationCardEmployeesImage">
-              <img className="imageEmployeesData" alt="User" src={User}></img>
-            </div>
-          )}
+          {location.employee.length === 1 &&
+            location.employee[0].hasOwnProperty("id") && (
+              <div className="locationCardEmployeesImage">
+                <img className="imageEmployeesData" alt="User" src={User}></img>
+              </div>
+            )}
         </div>
       </div>
     ));
@@ -109,7 +118,7 @@ const AdministrativeComponent = () => {
             className={`employeeCardSectionAction employee${employee.name}${employee.id}`}
             name="locations"
           >
-            <option value={""}></option>
+            <option value={"-"}></option>
             {locationData.map((location, index) => (
               <option value={index} key={index}>
                 {location.name}
