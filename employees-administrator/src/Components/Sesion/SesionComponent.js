@@ -27,10 +27,10 @@ const SesionComponent = () => {
       <div className="loginBase">
         <p className="loginBaseTitle">Employee Administrator</p>
         <p className="loginBaseSubTitle">Login</p>
-        <label className="loginInputLaber">
+        <label className="loginInputLabel">
           Username <input type={"text"} className="loginInputName"></input>
         </label>
-        <label className="loginInputLaber">
+        <label className="loginInputLabel">
           Password{" "}
           <input type={"password"} className="loginInputPassword"></input>
         </label>
