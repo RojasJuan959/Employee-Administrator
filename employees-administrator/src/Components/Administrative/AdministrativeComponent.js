@@ -20,12 +20,31 @@ const AdministrativeComponent = () => {
   useEffect(() => {}, [dbData]);
 
   const moveEmployee = (employeeID, locationID) => {
-    
 
-    setDbData((dbData) => [
-      ...dbData,
-      dbData[1].sede[locationID].employee.push(dbData[0].employee[employeeID]),
-    ]);
+    let boolLocationReady = false;
+
+    dbData[1].sede.map((dataEmployee) => {
+      dataEmployee.employee.map((dataEmployeeLocation, index) => {
+        if (!dataEmployeeLocation.hasOwnProperty("id")) {
+          dbData[1].sede[locationID].employee.splice(index, 1);
+        }
+
+        if (dataEmployeeLocation.hasOwnProperty("id")) {
+          if (dataEmployeeLocation.id === employeeID) {
+            alert("The employee is already at the workplace location");
+            boolLocationReady = true
+          }
+        }
+      });
+    });
+
+    if(boolLocationReady === false){
+      setDbData((dbData) => [
+        ...dbData,
+        dbData[1].sede[locationID].employee.push(dbData[0].employee[employeeID]),
+      ]);
+    }
+    
     console.log(dbData);
   };
 
@@ -40,7 +59,7 @@ const AdministrativeComponent = () => {
         </div>
         <button className="locationCardAction">More</button>
         <div className="locationCardEmployees">
-          {location.employee.length - 1 > 0 && (
+          {location.employee[0].hasOwnProperty("id") && (
             <div className="locationCardEmployeesImage">
               <img className="imageEmployeesData" alt="User" src={User}></img>
             </div>
