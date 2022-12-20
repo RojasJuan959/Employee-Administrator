@@ -7,27 +7,39 @@
   width: 100%;
 }
 
-.adminBaseLocation {
+.adminBaseLocationSubTitle {
+    text-align: center;
+    font-size: 35px;
+    letter-spacing: -2px;
+    font-weight: bold;
+    color: black;
+    margin: 20px 0px 0px 0px;
+}
+
+.adminBaseLocation,
+.adminBaseEmployees {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 
   border: 2px solid black;
+  margin: 20px 0px 20px 0px;
   box-shadow: 0px 0px 10px -3px black;
   border-radius: 16px;
 
   width: 60%;
-  height: 200px;
 }
 
-.locationBaseCard {
+.locationBaseCard,
+.employeesBaseCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   padding: 10px 10px 10px 10px;
+  margin: 20px 10px 20px 10px;
   border: 2px solid black;
   box-shadow: 0px 0px 10px -3px black;
   border-radius: 16px;
@@ -35,7 +47,14 @@
   width: 150px;
 }
 
-.locationCardImage {
+.employeesBaseCard {
+    margin: 20px 50px 20px 50px;
+
+    width: 200px;
+}
+
+.locationCardImage,
+.employeesCardImage {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,7 +66,8 @@
   height: 120px;
 }
 
-.imageData {
+.imageData,
+.imageEnployeesData {
   width: 65%;
 }
 
@@ -58,7 +78,7 @@
 
   border: 2px solid black;
   border-radius: 5px;
-  margin: 5px 0px 10px 10px;
+  margin: 5px 0px 10px 0px;
   padding: 2px 2px 2px 5px;
 
   height: 25px;
@@ -69,4 +89,54 @@
   font-weight: bold;
   font-size: 18px;
   letter-spacing: -1px;
+}
+
+.locationCardAction {
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: -1px;
+
+  width: 50%;
+  height: 25px;
+}
+
+.locationCardAction:hover {
+  height: 35px;
+}
+
+.locationCardEmployees {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  margin: 10px 0px 10px 0px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 2px 2px 2px 5px;
+
+  width: 80%;
+  height: 25px;
+}
+
+.locationCardEmployeesImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 35px;
+  height: 25px;
+}
+
+.imageEmployeesData {
+  width: 90%;
+}
+
+.employeeCardQR {
+    margin: 10px 5px 10px 5px;
+
+    width: 100%;
 }
