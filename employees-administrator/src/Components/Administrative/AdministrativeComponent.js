@@ -11,7 +11,7 @@ const AdministrativeComponent = () => {
   const navigate = useNavigate();
   const { dbData } = useContext(FireContext);
   const [locationData, setLocationData] = useState([]);
-  const [moveEmployeem, setMoveEmployee] = useState(false);
+  const [moveEmployeem, setMoveEmployee] = useState([]);
 
   useEffect(() => {
     if (dbData.length > 0) {
@@ -28,18 +28,12 @@ const AdministrativeComponent = () => {
       alert("Select some location to employee get into");
     } else {
       dbData[1].sede.map((dataEmployee) => {
-        dataEmployee.employee.map((dataEmployeeLocation, index) => {
-          if (!dataEmployeeLocation.hasOwnProperty("id")) {
-            dbData[1].sede[locationID].employee.splice(index, 1);
+        for (let i = 0; i < dataEmployee.employee.length; i++) {
+          if (dataEmployee.employee[i].id === employeeID) {
+            alert("The employee is already at the workplace location");
+            boolLocationReady = true;
           }
-
-          if (dataEmployeeLocation.hasOwnProperty("id")) {
-            if (dataEmployeeLocation.id === employeeID) {
-              alert("The employee is already at the workplace location");
-              boolLocationReady = true;
-            }
-          }
-        });
+        }
       });
 
       if (boolLocationReady === false) {
@@ -51,7 +45,8 @@ const AdministrativeComponent = () => {
         dbData[1].sede[locationID].employee.push(
           dbData[0].employee[employeeID]
         );
-        setMoveEmployee(true);
+
+        setMoveEmployee(dbData[1].sede[locationID].employee);
       }
     }
   };
@@ -74,12 +69,11 @@ const AdministrativeComponent = () => {
           More
         </button>
         <div className="locationCardEmployees">
-          {location.employee.length === 1 &&
-            location.employee[0].hasOwnProperty("id") && (
-              <div className="locationCardEmployeesImage">
-                <img className="imageEmployeesData" alt="User" src={User}></img>
-              </div>
-            )}
+          {location.employee.length > 0 && (
+            <div className="locationCardEmployeesImage">
+              <img className="imageEmployeesData" alt="User" src={User}></img>
+            </div>
+          )}
         </div>
       </div>
     ));

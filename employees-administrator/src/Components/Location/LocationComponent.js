@@ -11,15 +11,9 @@ import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
 const LocationComponent = ({ employees, name, lat, lng }) => {
   const { dbData } = useContext(FireContext);
-  const [employeeList, setEmployeeList] = useState([]);
-  const [moveEmployee, setMoveEmployee] = useState(false);
+  const [moveEmployee, setMoveEmployee] = useState([]);
   const position = [lat, lng];
 
-  useEffect(() => {
-    if (employees.length > 0 && employees[0].hasOwnProperty('id')) {
-      setEmployeeList(employees);
-    }
-  }, [employeeList]);
   useEffect(() => {}, [moveEmployee]);
 
   const DefaultIcon = leaflet.icon({
@@ -31,20 +25,19 @@ const LocationComponent = ({ employees, name, lat, lng }) => {
 
   const employeeSignOut = (id) => {
     dbData[1].sede.map((dataEmployee, indexLocation) => {
-      dataEmployee.employee.map((dataEmployeeLocation, indexEmployee) => {
-        if (dataEmployeeLocation.hasOwnProperty("id")) {
+      if (dataEmployee.name === name) {
+        dataEmployee.employee.map((dataEmployeeLocation, indexEmployee) => {
           if (dataEmployeeLocation.id === id) {
             dbData[1].sede[indexLocation].employee.splice(indexEmployee, 1);
-            setEmployeeList(dbData[1].sede[indexLocation].employee);
-            setMoveEmployee(true);
           }
-        }
-      });
+        });
+      }
     });
+    setMoveEmployee(id);
   };
 
   const employeeLocation = () => {
-    return employeeList.map((employee, index) => (
+    return employees.map((employee, index) => (
       <div className="employeesBaseCard" key={index}>
         <div className="employeeCardQR">
           <QRCode
@@ -71,7 +64,7 @@ const LocationComponent = ({ employees, name, lat, lng }) => {
         <div className="employeeCardAction">
           <button
             onClick={() => {
-              employeeSignOut(index);
+              employeeSignOut(employee.id);
             }}
             className="employeeAction"
           >
@@ -101,7 +94,7 @@ const LocationComponent = ({ employees, name, lat, lng }) => {
         </MapContainer>
       </div>
       <div className="locationEmployeesSite">
-        {employeeList.length > 0 && employeeLocation()}
+        {employees.length > 0 && employeeLocation()}
       </div>
     </div>
   );
